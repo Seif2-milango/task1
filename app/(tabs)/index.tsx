@@ -1,97 +1,114 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
-
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
+import { TextInput, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { Link } from 'expo-router';
+import { useState } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+
+import { CleanInput } from '@/components/ui/inputs/text';
+import { EmailInput } from '@/components/ui/inputs/email';
+import { PhoneInput } from '@/components/ui/inputs/number';
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Task</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
+  return (
+    <ThemedView style={{ flex: 1 }}>
+      <ThemedView style={{ width: '100%', height: 180, position: 'relative' }}>
+        <ThemedView
+          style={{
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            alignItems: 'flex-start',
+            width: '90%',
+            position: 'absolute',
+            top: 50,
+            left: 20,
+            // borderWidth: 1,
+            // borderColor: '#0040FF',
+            height: 90,
+            paddingHorizontal: 20,
+            backgroundColor: 'transparent',
+          }}
+        >
+          <ThemedView
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              backgroundColor: '#0040FF',
+              paddingHorizontal: 10,
+              borderRadius: 15,
+              marginBottom: 8,
+            }}
+          >
+            <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
+            <ThemedText style={{ fontSize: 12, color: 'white', fontWeight: '700' }}>
+              RESIDENT PORTAL
+            </ThemedText>
+          </ThemedView>
+
+          <ThemedText
+            style={{
+              color: '#000',
+              fontSize: 24,
+              fontWeight: '600',
+            }}
+          >
+            Welcome to the Stone Park App!
+          </ThemedText>
+        </ThemedView>
+      </ThemedView>
+
+      {/* Caption */}
+      <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 20 }}>
+        <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
+          Please fill in the form below and click submit when done.
         </ThemedText>
       </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
+
+      {/* Step 1 */}
+      <ThemedView
+      style={{
+        // borderWidth: 1,
+        // borderColor: '#0040FF',
+        width: '100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+
+
+      }}>
+        <CleanInput
+          label="Full name"
+          value={name}
+          onChangeText={setName}
+          placeholder="Enter your name"
+        />
+
+        <EmailInput
+          label="Email address"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="your@email.com"
+        />
+
+        <PhoneInput
+          label="Phone number"
+          value={phone}
+          onChangeText={setPhone}
+        />
       </ThemedView>
-    </ParallaxScrollView>
+
+      
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
   stepContainer: {
     gap: 8,
     marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+    paddingHorizontal: 20,
   },
 });
