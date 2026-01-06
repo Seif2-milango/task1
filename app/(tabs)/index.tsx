@@ -60,7 +60,7 @@ export default function HomeScreen() {
       </ThemedView>
 
       {/* Caption */}
-      <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 20 }}>
+      <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
         <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
           Please fill in the form below and click submit when done.
         </ThemedText>
@@ -72,6 +72,7 @@ export default function HomeScreen() {
         width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 15,
       }}>
         <CleanInput
           label="Full name"
