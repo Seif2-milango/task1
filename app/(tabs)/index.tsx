@@ -8,6 +8,7 @@ import { ThemedView } from '@/components/themed-view';
 import { CleanInput } from '@/components/ui/inputs/text';
 import { EmailInput } from '@/components/ui/inputs/email';
 import { PhoneInput } from '@/components/ui/inputs/number';
+import CompoundPicker from '@/components/ui/compoundPicker';
 
 export default function HomeScreen() {
   const [name, setName] = useState('');
@@ -32,19 +33,30 @@ export default function HomeScreen() {
           }}
         >
           <ThemedView
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: '#0040FF',
-              paddingHorizontal: 10,
-              borderRadius: 15,
-              marginBottom: 8,
-            }}
-          >
-            <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
-            <ThemedText style={{ fontSize: 12, color: 'white', fontWeight: '700' }}>
-              RESIDENT PORTAL
-            </ThemedText>
+          style={{
+            width: '100%',
+            flexDirection: 'row',            
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            gap: 10,
+          }}>
+            <ThemedView
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                backgroundColor: '#0040FF',
+                paddingHorizontal: 10,
+                borderRadius: 15,
+                marginBottom: 8,
+              }}
+            >
+              <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
+              <ThemedText style={{ fontSize: 12, color: 'white', fontWeight: '700' }}>
+                RESIDENT PORTAL
+              </ThemedText>
+            </ThemedView>
+
+            <CompoundPicker/>
           </ThemedView>
 
           <ThemedText
