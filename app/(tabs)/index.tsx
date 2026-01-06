@@ -9,11 +9,19 @@ import { CleanInput } from '@/components/ui/inputs/text';
 import { EmailInput } from '@/components/ui/inputs/email';
 import { PhoneInput } from '@/components/ui/inputs/number';
 import CompoundPicker from '@/components/ui/compoundPicker';
+import CommonInputs from '@/components/ui/inputs/commonInputs';
+
+import formSchema from '@/assets/data/formSchema.json';
 
 export default function HomeScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [compoundId, setCompoundId] = useState<string | null>(null);
+
+  const compoundData = compoundId
+    ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
+    : null;
 
   return (
     <ThemedView style={{ flex: 1 }}>
@@ -27,7 +35,7 @@ export default function HomeScreen() {
             position: 'absolute',
             top: 50,
             left: 20,
-            height: 90,
+            height: 'auto', //was 90
             paddingHorizontal: 20,
             backgroundColor: 'transparent',
           }}
@@ -39,6 +47,7 @@ export default function HomeScreen() {
             alignItems: 'center',
             justifyContent: 'space-between',
             gap: 10,
+            marginBottom: 20,
           }}>
             <ThemedView
               style={{
@@ -48,6 +57,7 @@ export default function HomeScreen() {
                 paddingHorizontal: 10,
                 borderRadius: 15,
                 marginBottom: 8,
+                height: 30,
               }}
             >
               <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
@@ -56,7 +66,7 @@ export default function HomeScreen() {
               </ThemedText>
             </ThemedView>
 
-            <CompoundPicker/>
+            <CompoundPicker onSelect={setCompoundId}/>
           </ThemedView>
 
           <ThemedText
@@ -66,7 +76,7 @@ export default function HomeScreen() {
               fontWeight: '600',
             }}
           >
-            Welcome to the Stone Park App!
+            Welcome to the {compoundData?.label || 'Compound'} registration form!
           </ThemedText>
         </ThemedView>
       </ThemedView>
@@ -86,7 +96,7 @@ export default function HomeScreen() {
         alignItems: 'center',
         gap: 15,
       }}>
-        <CleanInput
+        {/* <CleanInput
           label="Full name"
           value={name}
           onChangeText={setName}
@@ -104,6 +114,15 @@ export default function HomeScreen() {
           label="Phone number"
           value={phone}
           onChangeText={setPhone}
+        /> */}
+
+        <CommonInputs
+          name={name}
+          setName={setName}
+          email={email}
+          setEmail={setEmail}
+          phone={phone}
+          setPhone={setPhone}
         />
       </ThemedView>
     </ThemedView>

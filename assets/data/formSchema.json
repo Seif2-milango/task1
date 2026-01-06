@@ -1,0 +1,95 @@
+{
+  "commonFields": [
+    {
+      "id": "name",
+      "label": "Full Name",
+      "type": "text",
+      "required": true
+    },
+    {
+      "id": "email",
+      "label": "Email Address",
+      "type": "email",
+      "required": true
+    },
+    {
+      "id": "phone",
+      "label": "Phone Number",
+      "type": "tel",
+      "required": true
+    }
+  ],
+  "compounds": {
+    "1": {
+      "label": "Stone Park",
+      "fields": [
+        {
+          "id": "houseType",
+          "label": "House Type",
+          "type": "picker",
+          "options": ["Villa", "Townhouse", "Apartment"],
+          "required": true
+        },
+        {
+          "id": "houseNumber",
+          "label": "House Number",
+          "type": "text",
+          "validation": {
+            "pattern": "^(?:[1-9][0-9]{0,2}|[1-2][0-9]{2,2}|[1-3][0-9]{2})$"
+          },
+          "required": true
+        }
+      ]
+    },
+    "2": {
+      "label": "CFC Villas",
+      "fields": [
+        {
+          "id": "houseNumber",
+          "label": "House Number",
+          "type": "number",
+          "validation": {
+            "min": 1,
+            "max": 200
+          },
+          "required": true
+        },
+        {
+          "id": "moveInDate",
+          "label": "Date Moved In",
+          "type": "date",
+          "validation": {
+            "minDate": "2014-01-01",
+            "maxDate": "today"
+          },
+          "required": true
+        }
+      ]
+    },
+    "3": {
+      "label": "Green Acres",
+      "fields": [
+        {
+          "id": "apartmentNumber",
+          "label": "Apartment Number",
+          "type": "picker",
+          "options": {
+            "from": 1,
+            "to": 200
+          },
+          "required": true
+        },
+        {
+          "id": "passportNumber",
+          "label": "Passport Number",
+          "type": "text",
+          "validation": {
+            "pattern": "^[A-Z0-9]{9}$"
+          },
+          "icon": "passport",
+          "required": true
+        }
+      ]
+    }
+  }
+}
