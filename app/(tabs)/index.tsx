@@ -26,8 +26,6 @@ export default function HomeScreen() {
             position: 'absolute',
             top: 50,
             left: 20,
-            // borderWidth: 1,
-            // borderColor: '#0040FF',
             height: 90,
             paddingHorizontal: 20,
             backgroundColor: 'transparent',
@@ -71,13 +69,9 @@ export default function HomeScreen() {
       {/* Step 1 */}
       <ThemedView
       style={{
-        // borderWidth: 1,
-        // borderColor: '#0040FF',
         width: '100%',
         flexDirection: 'column',
         alignItems: 'center',
-
-
       }}>
         <CleanInput
           label="Full name"
@@ -99,8 +93,6 @@ export default function HomeScreen() {
           onChangeText={setPhone}
         />
       </ThemedView>
-
-      
     </ThemedView>
   );
 }
