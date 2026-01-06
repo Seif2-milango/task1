@@ -10,6 +10,7 @@ import { EmailInput } from '@/components/ui/inputs/email';
 import { PhoneInput } from '@/components/ui/inputs/number';
 import CompoundPicker from '@/components/ui/compoundPicker';
 import CommonInputs from '@/components/ui/inputs/commonInputs';
+import Compound1Input from '@/components/ui/inputs/uniqueInputs/compound1';
 
 import formSchema from '@/assets/data/formSchema.json';
 
@@ -18,6 +19,7 @@ export default function HomeScreen() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [compoundId, setCompoundId] = useState<string | null>(null);
+  const [unit, setUnit] = useState('');
 
   const compoundData = compoundId
     ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
@@ -124,6 +126,14 @@ export default function HomeScreen() {
           phone={phone}
           setPhone={setPhone}
         />
+
+        {compoundId === 'c1' && (
+          <Compound1Input
+            value={unit}
+            onChangeText={setUnit}
+            placeholder='Number'
+          />
+        )}
       </ThemedView>
     </ThemedView>
   );

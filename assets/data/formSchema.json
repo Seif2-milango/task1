@@ -20,7 +20,7 @@
     }
   ],
   "compounds": {
-    "1": {
+    "c1": {
       "label": "Stone Park",
       "fields": [
         {
@@ -41,7 +41,7 @@
         }
       ]
     },
-    "2": {
+    "c2": {
       "label": "CFC Villas",
       "fields": [
         {
@@ -66,7 +66,7 @@
         }
       ]
     },
-    "3": {
+    "c3": {
       "label": "Green Acres",
       "fields": [
         {
