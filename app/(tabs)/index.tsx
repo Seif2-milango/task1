@@ -131,7 +131,7 @@ export default function HomeScreen() {
           <Compound1Input
             value={unit}
             onChangeText={setUnit}
-            placeholder='Number'
+            placeholder='Unit number'
           />
         )}
       </ThemedView>
