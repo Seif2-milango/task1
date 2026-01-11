@@ -22,6 +22,7 @@ export default function HomeScreen() {
   const [houseType, setHouseType] = useState<string | null>(null);
 
   const [villaNo, setVillaNo] = useState('');
+  const [moveInDate, setMoveInDate] = useState<Date | null>(null);
 
   const compoundData = compoundId
     ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
@@ -142,11 +143,10 @@ export default function HomeScreen() {
           <Compound2Input
             villaNo={villaNo}
             setVillaNo={setVillaNo}
-            moveInDate={''}
-            setMoveInDate={() => {}}
+            moveInDate={moveInDate}
+            setMoveInDate={setMoveInDate}
           />
         )}
-        
       </ThemedView>
     </ThemedView>
   );
