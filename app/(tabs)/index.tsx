@@ -15,7 +15,9 @@ export default function HomeScreen() {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [compoundId, setCompoundId] = useState<string | null>(null);
+
   const [unit, setUnit] = useState('');
+  const [houseType, setHouseType] = useState<string | null>(null);
 
   const compoundData = compoundId
     ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
@@ -127,6 +129,7 @@ export default function HomeScreen() {
           <Compound1Input
             value={unit}
             onChangeText={setUnit}
+            onSelect={setHouseType}
             placeholder='Unit number'
           />
         )}
