@@ -1,13 +1,9 @@
-import { TextInput, StyleSheet } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
-import { Link } from 'expo-router';
-import { useState } from 'react';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { MaterialIcons } from '@expo/vector-icons';
+import { useState } from 'react';
+import { StyleSheet } from 'react-native';
 
-import { CleanInput } from '@/components/ui/inputs/text';
-import { EmailInput } from '@/components/ui/inputs/email';
-import { PhoneInput } from '@/components/ui/inputs/number';
 import CompoundPicker from '@/components/ui/compoundPicker';
 import CommonInputs from '@/components/ui/inputs/commonInputs';
 import Compound1Input from '@/components/ui/inputs/uniqueInputs/compound1';
