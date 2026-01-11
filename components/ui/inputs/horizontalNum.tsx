@@ -33,7 +33,7 @@ export default function NumberInput({
   return (
     <ThemedView style={styles.container}>
       <ThemedText style={styles.label}>{label}</ThemedText>
-      <ThemedView style={{ width: "60%" }}>
+      <ThemedView style={{ width: "50%" }}>
         <TextInput
           value={value}
           onChangeText={validate}

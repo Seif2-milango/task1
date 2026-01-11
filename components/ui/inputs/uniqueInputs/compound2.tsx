@@ -50,7 +50,7 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
                     value={villaNo}
                     setValue={setVillaNo}
                     regex={villaNoRegex}
-                    errorMessage="Invalid villa number: 1–200"
+                    errorMessage="Invalid villa number: 1-200"
                 />
                 {/* <ThemedText style={styles.label}>Villa number</ThemedText>
                 <ThemedView style={{ width: '60%' }}>
