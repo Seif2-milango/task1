@@ -2,12 +2,13 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 import CompoundPicker from '@/components/ui/compoundPicker';
 import CommonInputs from '@/components/ui/inputs/commonInputs';
 import Compound1Input from '@/components/ui/inputs/uniqueInputs/compound1';
 import Compound2Input from '@/components/ui/inputs/uniqueInputs/compound2';
+import Compound3Input from '@/components/ui/inputs/uniqueInputs/compound3';
 
 import formSchema from '@/assets/data/formSchema.json';
 
@@ -30,124 +31,138 @@ export default function HomeScreen() {
 
   return (
     <ThemedView style={{ flex: 1 }}>
-      <ThemedView style={{ width: '100%', height: 180, position: 'relative' }}>
-        <ThemedView
-          style={{
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            alignItems: 'flex-start',
-            width: '90%',
-            position: 'absolute',
-            top: 50,
-            left: 20,
-            height: 'auto', //was 90
-            paddingHorizontal: 20,
-            backgroundColor: 'transparent',
-          }}
-        >
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        <ThemedView style={{ width: '100%', height: 180, position: 'relative' }}>
           <ThemedView
-          style={{
-            width: '100%',
-            flexDirection: 'row',            
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: 10,
-            marginBottom: 20,
-          }}>
-            <ThemedView
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                backgroundColor: '#0040FF',
-                paddingHorizontal: 10,
-                borderRadius: 15,
-                marginBottom: 8,
-                height: 30,
-              }}
-            >
-              <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
-              <ThemedText style={{ fontSize: 12, color: 'white', fontWeight: '700' }}>
-                RESIDENT PORTAL
-              </ThemedText>
-            </ThemedView>
-
-            <CompoundPicker onSelect={setCompoundId}/>
-          </ThemedView>
-
-          <ThemedText
             style={{
-              color: '#000',
-              fontSize: 24,
-              fontWeight: '600',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              alignItems: 'flex-start',
+              width: '90%',
+              position: 'absolute',
+              top: 50,
+              left: 20,
+              height: 'auto', //was 90
+              paddingHorizontal: 20,
+              backgroundColor: 'transparent',
             }}
           >
-            Welcome to the {compoundData?.label || 'Compound'} registration form!
+            <ThemedView
+            style={{
+              width: '100%',
+              flexDirection: 'row',            
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              gap: 10,
+              marginBottom: 20,
+            }}>
+              <ThemedView
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  backgroundColor: '#0040FF',
+                  paddingHorizontal: 10,
+                  borderRadius: 15,
+                  marginBottom: 8,
+                  height: 30,
+                }}
+              >
+                <MaterialIcons name="house" size={16} color="white" style={{ marginRight: 5 }} />
+                <ThemedText style={{ fontSize: 12, color: 'white', fontWeight: '700' }}>
+                  RESIDENT PORTAL
+                </ThemedText>
+              </ThemedView>
+
+              <CompoundPicker onSelect={setCompoundId}/>
+            </ThemedView>
+
+            <ThemedText
+              style={{
+                color: '#000',
+                fontSize: 24,
+                fontWeight: '600',
+              }}
+            >
+              Welcome to the {compoundData?.label || 'Compound'} registration form!
+            </ThemedText>
+          </ThemedView>
+        </ThemedView>
+
+        {/* Caption */}
+        <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
+          <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
+            Please fill in the form below and click submit when done.
           </ThemedText>
         </ThemedView>
-      </ThemedView>
 
-      {/* Caption */}
-      <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
-        <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
-          Please fill in the form below and click submit when done.
-        </ThemedText>
-      </ThemedView>
-
-      {/* Step 1 */}
-      <ThemedView
-      style={{
-        width: '100%',
-        flexDirection: 'column',
-        alignItems: 'center',
-        gap: 15,
-      }}>
-        {/* <CleanInput
-          label="Full name"
-          value={name}
-          onChangeText={setName}
-          placeholder="Enter your name"
-        />
-
-        <EmailInput
-          label="Email address"
-          value={email}
-          onChangeText={setEmail}
-          placeholder="your@email.com"
-        />
-
-        <PhoneInput
-          label="Phone number"
-          value={phone}
-          onChangeText={setPhone}
-        /> */}
-
-        <CommonInputs
-          name={name}
-          setName={setName}
-          email={email}
-          setEmail={setEmail}
-          phone={phone}
-          setPhone={setPhone}
-        />
-
-        {compoundId === 'c1' && (
-          <Compound1Input
-            value={unit}
-            onChangeText={setUnit}
-            onSelect={setHouseType}
-            placeholder='Unit number'
+        {/* Step 1 */}
+        <ThemedView
+        style={{
+          width: '100%',
+          flexDirection: 'column',
+          alignItems: 'center',
+          gap: 15,
+        }}>
+          {/* <CleanInput
+            label="Full name"
+            value={name}
+            onChangeText={setName}
+            placeholder="Enter your name"
           />
-        )}
 
-        {compoundId === 'c2' && (
-          <Compound2Input
-            villaNo={villaNo}
-            setVillaNo={setVillaNo}
-            moveInDate={moveInDate}
-            setMoveInDate={setMoveInDate}
+          <EmailInput
+            label="Email address"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="your@email.com"
           />
-        )}
-      </ThemedView>
+
+          <PhoneInput
+            label="Phone number"
+            value={phone}
+            onChangeText={setPhone}
+          /> */}
+
+          <CommonInputs
+            name={name}
+            setName={setName}
+            email={email}
+            setEmail={setEmail}
+            phone={phone}
+            setPhone={setPhone}
+          />
+
+          {compoundId === 'c1' && (
+            <Compound1Input
+              value={unit}
+              onChangeText={setUnit}
+              onSelect={setHouseType}
+              placeholder='Unit number'
+            />
+          )}
+
+          {compoundId === 'c2' && (
+            <Compound2Input
+              villaNo={villaNo}
+              setVillaNo={setVillaNo}
+              moveInDate={moveInDate}
+              setMoveInDate={setMoveInDate}
+            />
+          )}
+
+          {compoundId === 'c3' && (
+            <Compound3Input
+              aptNo={unit}
+              setAptNo={setUnit}
+              passportNo={email}
+              setPassportNo={setEmail}
+            />
+          )}
+        </ThemedView>
+      </ScrollView>
     </ThemedView>
   );
 }
@@ -158,4 +173,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     paddingHorizontal: 20,
   },
+  scrollContent: {
+    paddingBottom: 40,
+  }
 });

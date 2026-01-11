@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { ThemedText } from "../../../themed-text";
 import { ThemedView } from "../../../themed-view";
+import NumberInput from "../horizontalNum";
 
 type Compound2InputProps = {
   villaNo: string;
@@ -13,6 +14,8 @@ type Compound2InputProps = {
 
 export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMoveInDate}: Compound2InputProps) {
     const [villaNoError, setVillaNoError] = useState<string | null>(null);
+    const villaNoRegex = /^(?:[1-9]\d?|1\d\d|200)$/;
+
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
     const [moveInDateError, setMoveInDateError] = useState<string | null>(null);
 
@@ -42,7 +45,14 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
     return (
         <ThemedView style={styles.external}>
             <ThemedView style={styles.container1}>
-                <ThemedText style={styles.label}>Villa number</ThemedText>
+                <NumberInput
+                    label="Villa number"
+                    value={villaNo}
+                    setValue={setVillaNo}
+                    regex={villaNoRegex}
+                    errorMessage="Invalid villa number: 1-200"
+                />
+                {/* <ThemedText style={styles.label}>Villa number</ThemedText>
                 <ThemedView style={{ width: '60%' }}>
                     <TextInput
                         value={villaNo}
@@ -54,7 +64,7 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
                         style={[styles.input, villaNoError ? styles.inputError : null]}
                     />
                     {villaNoError && <ThemedText style={styles.errorText}>{villaNoError}</ThemedText>}
-                </ThemedView>
+                </ThemedView> */}
             </ThemedView>
 
             <ThemedView style={styles.container2}>
