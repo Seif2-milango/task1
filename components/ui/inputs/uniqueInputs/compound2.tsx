@@ -14,6 +14,7 @@ type Compound2InputProps = {
 export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMoveInDate}: Compound2InputProps) {
     const [villaNoError, setVillaNoError] = useState<string | null>(null);
     const [isDatePickerVisible, setDatePickerVisible] = useState(false);
+    const [moveInDateError, setMoveInDateError] = useState<string | null>(null);
 
     const validateVillaNo = (text: string) => {
         setVillaNo(text);
@@ -26,8 +27,15 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
     const hideDatePicker = () => setDatePickerVisible(false);
 
     const handleConfirm = (date: Date) => {
-        console.log("Selected date:", date);
+        const mindDate = new Date('2014-01-01');
+        const maxdDate = new Date();
+
+        if (date < mindDate || date > maxdDate) {
+            setMoveInDateError('Date must be between 01/01/2014 and today');
+            return;
+        }
         setMoveInDate(date);
+        setMoveInDateError(null);
         hideDatePicker();
     };
     
@@ -64,6 +72,7 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
                     onCancel={hideDatePicker}
                     date={moveInDate || new Date()}
                 />
+                {moveInDateError && <ThemedText style={styles.errorText}>{moveInDateError}</ThemedText>}
             </ThemedView>
         </ThemedView>
     )
@@ -109,8 +118,6 @@ const styles = StyleSheet.create({
         borderColor: '#EF4444',
     },
     errorText: {
-        position: 'absolute',
-        bottom: -30,
         marginTop: 6,
         fontSize: 13,
         color: '#EF4444',
