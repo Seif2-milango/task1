@@ -7,6 +7,7 @@ import { StyleSheet } from 'react-native';
 import CompoundPicker from '@/components/ui/compoundPicker';
 import CommonInputs from '@/components/ui/inputs/commonInputs';
 import Compound1Input from '@/components/ui/inputs/uniqueInputs/compound1';
+import Compound2Input from '@/components/ui/inputs/uniqueInputs/compound2';
 
 import formSchema from '@/assets/data/formSchema.json';
 
@@ -14,10 +15,13 @@ export default function HomeScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+
   const [compoundId, setCompoundId] = useState<string | null>(null);
 
   const [unit, setUnit] = useState('');
   const [houseType, setHouseType] = useState<string | null>(null);
+
+  const [villaNo, setVillaNo] = useState('');
 
   const compoundData = compoundId
     ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
@@ -133,6 +137,16 @@ export default function HomeScreen() {
             placeholder='Unit number'
           />
         )}
+
+        {compoundId === 'c2' && (
+          <Compound2Input
+            villaNo={villaNo}
+            setVillaNo={setVillaNo}
+            moveInDate={''}
+            setMoveInDate={() => {}}
+          />
+        )}
+        
       </ThemedView>
     </ThemedView>
   );
