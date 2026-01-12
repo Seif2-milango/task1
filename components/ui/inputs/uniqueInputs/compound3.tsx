@@ -54,26 +54,6 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
                 placeholder="Enter here"
             />
 
-            {/* <ThemedView style={styles.passportContainer}>
-                <ThemedText style={styles.label}>Passport number</ThemedText>
-                <Image
-                    source={require("../../../../assets/images/passport.png")}
-                    style={styles.image}
-                    resizeMode="contain"
-                />
-
-                <NumberInput
-                    label=""
-                    value={passportNo}
-                    setValue={validatePassportNo}
-                    regex={passportRegex}
-                    errorMessage="Passport number must be 9 characters, A-Z and 0-9 only"
-                    maxLength={9}
-                    size="large"
-                    placeholder="A89141501"
-                />
-            </ThemedView> */}
-
             <ThemedView style={styles.passportContainer}>
                 <ThemedText style={styles.label}>Passport number</ThemedText>
                 <Image
