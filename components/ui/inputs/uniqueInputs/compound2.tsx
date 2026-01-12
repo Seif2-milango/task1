@@ -3,7 +3,7 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { ThemedText } from "../../../themed-text";
 import { ThemedView } from "../../../themed-view";
-import NumberInput from "../horizontalNum";
+import NumberInput from "../number";
 
 type Compound2InputProps = {
   villaNo: string;

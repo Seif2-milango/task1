@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/themed-text";
 import { useState } from "react";
 import { Image, StyleSheet } from "react-native";
 import { ThemedView } from "../../../themed-view";
-import NumberInput from "../horizontalNum";
+import NumberInput from "../number";
 
 type Compound3InputProps = {
   aptNo: string;
