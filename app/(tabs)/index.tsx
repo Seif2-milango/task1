@@ -37,7 +37,7 @@ export default function HomeScreen() {
   const isCompoundValid =
     (compoundId === 'c1' && unit.trim() && houseType) ||
     (compoundId === 'c2' && villaNo.trim() && moveInDate) ||
-    (compoundId === 'c3' && unit.trim() && email.trim());
+    (compoundId === 'c3' && aptNo.trim() && passportNo.trim());
   const isFormValid = isCommonValid && isCompoundValid && consent;
 
   const [submitting, setSubmitting] = useState(false);
@@ -84,7 +84,7 @@ export default function HomeScreen() {
 
         <ThemedView style={{ width: '100%', gap: 8 }}>
           {Object.entries(submittedData).map(([key, value]) => (
-            <ThemedText key={key} style={{ fontSize: 14, color: '#414141' }}>
+            <ThemedText key={key} style={{ fontSize: 14, color: '#414141', textAlign: 'center' }}>
               {key}: {value?.toString()}
             </ThemedText>
           ))}
