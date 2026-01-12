@@ -52,19 +52,6 @@ export default function Compound2Input({villaNo, setVillaNo, moveInDate, setMove
                     regex={villaNoRegex}
                     errorMessage="Invalid villa number: 1-200"
                 />
-                {/* <ThemedText style={styles.label}>Villa number</ThemedText>
-                <ThemedView style={{ width: '60%' }}>
-                    <TextInput
-                        value={villaNo}
-                        onChangeText={validateVillaNo}
-                        placeholder="Enter here"
-                        placeholderTextColor="#9CA3AF"
-                        keyboardType="number-pad"
-                        maxLength={11}
-                        style={[styles.input, villaNoError ? styles.inputError : null]}
-                    />
-                    {villaNoError && <ThemedText style={styles.errorText}>{villaNoError}</ThemedText>}
-                </ThemedView> */}
             </ThemedView>
 
             <ThemedView style={styles.container2}>
@@ -110,7 +97,6 @@ const styles = StyleSheet.create({
         marginBottom: 6,
         fontWeight: '500',
         paddingHorizontal: 15,
-        // textAlign: 'center',
         height: 'auto',
     },
     input: {
