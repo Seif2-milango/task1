@@ -12,6 +12,7 @@ type NumberInputProps = {
   errorMessage: string;
   maxLength?: number;
   size?: "small" | "medium" | "large";
+  editable?: boolean;
 };
 
 export default function NumberInput({
@@ -23,6 +24,7 @@ export default function NumberInput({
     errorMessage,
     maxLength = 11,
     size = "medium",
+    editable = true,
 }: NumberInputProps) {
   const [error, setError] = useState<string | null>(null);
 
@@ -50,6 +52,7 @@ export default function NumberInput({
           keyboardType="number-pad"
           maxLength={maxLength}
           style={[styles.input, error ? styles.inputError : null, isLarge && styles.largeInput]}
+          editable={editable}
         />
         {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
       </ThemedView>
