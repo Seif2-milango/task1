@@ -92,6 +92,7 @@ export default function HomeScreen() {
       </ThemedView>
     );
   }
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <ScrollView
@@ -154,7 +155,16 @@ export default function HomeScreen() {
           </ThemedView>
         </ThemedView>
 
-        {/* Caption */}
+        {!compoundId ? (
+            <ThemedView>
+              <ThemedText>
+                Please select a compound to proceed with the registration.
+              </ThemedText>
+            </ThemedView>
+          )
+          : 
+          (<>
+            {/* Caption */}
         <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
           <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
             Please fill in the form below and click submit when done.
@@ -267,6 +277,10 @@ export default function HomeScreen() {
             {submitting ? 'Submitting...' : 'Submit'}
           </ThemedText>
         </Pressable>
+          </>)
+        }
+
+        
 
       </ScrollView>
     </ThemedView>
