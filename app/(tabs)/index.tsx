@@ -75,6 +75,22 @@ export default function HomeScreen() {
   };
 
   if (submitted && submittedData) {
+    const handleReset = () => {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCompoundId(null);
+      setUnit('');
+      setHouseType(null);
+      setVillaNo('');
+      setMoveInDate(null);
+      setAptNo('');
+      setPassportNo('');
+      setConsent(false);
+      setSubmitted(false);
+      setSubmittedData(null);
+    };
+
     return (
       <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
         <MaterialIcons name="check-circle" size={64} color="#00AEFF" />
@@ -89,6 +105,21 @@ export default function HomeScreen() {
             </ThemedText>
           ))}
         </ThemedView>
+
+        <Pressable
+          onPress={handleReset}
+          style={{
+            marginTop: 30,
+            paddingVertical: 12,
+            paddingHorizontal: 25,
+            borderRadius: 20,
+            backgroundColor: '#00AEFF',
+          }}
+        >
+          <ThemedText style={{ color: 'white', fontWeight: '600', fontSize: 16 }}>
+            Go again?
+          </ThemedText>
+        </Pressable>
       </ThemedView>
     );
   }
