@@ -37,7 +37,7 @@ export default function HomeScreen() {
   const isCompoundValid =
     (compoundId === 'c1' && unit.trim() && houseType) ||
     (compoundId === 'c2' && villaNo.trim() && moveInDate) ||
-    (compoundId === 'c3' && unit.trim() && email.trim());
+    (compoundId === 'c3' && aptNo.trim() && passportNo.trim());
   const isFormValid = isCommonValid && isCompoundValid && consent;
 
   const [submitting, setSubmitting] = useState(false);
@@ -75,6 +75,22 @@ export default function HomeScreen() {
   };
 
   if (submitted && submittedData) {
+    const handleReset = () => {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setCompoundId(null);
+      setUnit('');
+      setHouseType(null);
+      setVillaNo('');
+      setMoveInDate(null);
+      setAptNo('');
+      setPassportNo('');
+      setConsent(false);
+      setSubmitted(false);
+      setSubmittedData(null);
+    };
+
     return (
       <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
         <MaterialIcons name="check-circle" size={64} color="#00AEFF" />
@@ -84,14 +100,30 @@ export default function HomeScreen() {
 
         <ThemedView style={{ width: '100%', gap: 8 }}>
           {Object.entries(submittedData).map(([key, value]) => (
-            <ThemedText key={key} style={{ fontSize: 14, color: '#414141' }}>
+            <ThemedText key={key} style={{ fontSize: 14, color: '#414141', textAlign: 'center' }}>
               {key}: {value?.toString()}
             </ThemedText>
           ))}
         </ThemedView>
+
+        <Pressable
+          onPress={handleReset}
+          style={{
+            marginTop: 30,
+            paddingVertical: 12,
+            paddingHorizontal: 25,
+            borderRadius: 20,
+            backgroundColor: '#00AEFF',
+          }}
+        >
+          <ThemedText style={{ color: 'white', fontWeight: '600', fontSize: 16 }}>
+            Go again?
+          </ThemedText>
+        </Pressable>
       </ThemedView>
     );
   }
+
   return (
     <ThemedView style={{ flex: 1 }}>
       <ScrollView
@@ -108,7 +140,7 @@ export default function HomeScreen() {
               position: 'absolute',
               top: 50,
               left: 20,
-              height: 'auto', //was 90
+              height: 'auto',
               paddingHorizontal: 20,
               backgroundColor: 'transparent',
             }}
@@ -154,120 +186,107 @@ export default function HomeScreen() {
           </ThemedView>
         </ThemedView>
 
-        {/* Caption */}
-        <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
-          <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
-            Please fill in the form below and click submit when done.
-          </ThemedText>
-        </ThemedView>
+        {!compoundId ? (
+            <ThemedView style={{width: '100%', alignItems: 'center',}}>
+              <ThemedText style={{ width: '80%', color: '#7d7d7d' }}>
+                Please select a compound to proceed with the registration...
+              </ThemedText>
+            </ThemedView>
+          ) : (
+          <>
+            <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
+              <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
+                Please fill in the form below and click submit when done.
+              </ThemedText>
+            </ThemedView>
 
-        {/* Step 1 */}
-        <ThemedView
-        style={{
-          width: '100%',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 15,
-        }}>
-          {/* <CleanInput
-            label="Full name"
-            value={name}
-            onChangeText={setName}
-            placeholder="Enter your name"
-          />
-
-          <EmailInput
-            label="Email address"
-            value={email}
-            onChangeText={setEmail}
-            placeholder="your@email.com"
-          />
-
-          <PhoneInput
-            label="Phone number"
-            value={phone}
-            onChangeText={setPhone}
-          /> */}
-
-          <CommonInputs
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            phone={phone}
-            setPhone={setPhone}
-          />
-
-          {compoundId === 'c1' && (
-            <Compound1Input
-              value={unit}
-              onChangeText={setUnit}
-              onSelect={setHouseType}
-              placeholder='Unit number'
-            />
-          )}
-
-          {compoundId === 'c2' && (
-            <Compound2Input
-              villaNo={villaNo}
-              setVillaNo={setVillaNo}
-              moveInDate={moveInDate}
-              setMoveInDate={setMoveInDate}
-            />
-          )}
-
-          {compoundId === 'c3' && (
-            <Compound3Input
-              aptNo={aptNo}
-              setAptNo={setAptNo}
-              passportNo={passportNo}
-              setPassportNo={setPassportNo}
-            />
-          )}
-        </ThemedView>
-
-        <ThemedView
-          style={{
-            width: '80%',
-            marginTop: 30,
-            alignSelf: 'center',
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-            gap: 10,
-          }}
-        >
-          <Pressable onPress={() => setConsent(!consent)}>
-            <MaterialIcons
-              name={consent ? 'check-box' : 'check-box-outline-blank'}
-              size={24}
-              color="#414141d0"
+            <ThemedView
+            style={{
+              width: '100%',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 15,
+            }}>
               
-            />
-          </Pressable>
+              <CommonInputs
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                phone={phone}
+                setPhone={setPhone}
+              />
 
-          <ThemedText style={{ flex: 1, fontSize: 12, lineHeight: 15, color: '#B0B0B0'  }}>
-            I confirm that I have read and agree to the Terms and Conditions and Privacy Policy, and I consent to the processing of my personal data for account registration and use of the application.
-          </ThemedText>
-        </ThemedView>
+              {compoundId === 'c1' && (
+                <Compound1Input
+                  value={unit}
+                  onChangeText={setUnit}
+                  onSelect={setHouseType}
+                  placeholder='Unit number'
+                />
+              )}
 
-        <Pressable
-          disabled={!isFormValid || submitting}
-          onPress={handleSubmit}
-          style={{
-            width: '80%',
-            alignSelf: 'center',
-            marginTop: 20,
-            paddingVertical: 14,
-            borderRadius: 20,
-            backgroundColor: isFormValid ? '#00AEFF' : '#B0B0B0',
-            alignItems: 'center',
-          }}
-        >
-          <ThemedText style={{ color: 'white', fontWeight: '600' }}>
-            {submitting ? 'Submitting...' : 'Submit'}
-          </ThemedText>
-        </Pressable>
+              {compoundId === 'c2' && (
+                <Compound2Input
+                  villaNo={villaNo}
+                  setVillaNo={setVillaNo}
+                  moveInDate={moveInDate}
+                  setMoveInDate={setMoveInDate}
+                />
+              )}
 
+              {compoundId === 'c3' && (
+                <Compound3Input
+                  aptNo={aptNo}
+                  setAptNo={setAptNo}
+                  passportNo={passportNo}
+                  setPassportNo={setPassportNo}
+                />
+              )}
+            </ThemedView>
+
+            <ThemedView
+              style={{
+                width: '80%',
+                marginTop: 30,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                gap: 10,
+              }}
+            >
+              <Pressable onPress={() => setConsent(!consent)}>
+                <MaterialIcons
+                  name={consent ? 'check-box' : 'check-box-outline-blank'}
+                  size={24}
+                  color="#414141d0"
+                  
+                />
+              </Pressable>
+
+              <ThemedText style={{ flex: 1, fontSize: 12, lineHeight: 15, color: '#B0B0B0'  }}>
+                I confirm that I have read and agree to the Terms and Conditions and Privacy Policy, and I consent to the processing of my personal data for account registration and use of the application.
+              </ThemedText>
+            </ThemedView>
+
+            <Pressable
+              disabled={!isFormValid || submitting}
+              onPress={handleSubmit}
+              style={{
+                width: '80%',
+                alignSelf: 'center',
+                marginTop: 20,
+                paddingVertical: 14,
+                borderRadius: 20,
+                backgroundColor: isFormValid ? '#00AEFF' : '#7d7d7d',
+                alignItems: 'center',
+              }}
+            >
+              <ThemedText style={{ color: 'white', fontWeight: '600' }}>
+                {submitting ? 'Submitting...' : 'Submit'}
+              </ThemedText>
+            </Pressable>
+          </>)}
       </ScrollView>
     </ThemedView>
   );

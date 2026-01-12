@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { TextInput, StyleSheet } from 'react-native';
-import { ThemedView } from '@/components/themed-view';
 import { ThemedText } from '@/components/themed-text';
+import { ThemedView } from '@/components/themed-view';
+import { useState } from 'react';
+import { StyleSheet, TextInput } from 'react-native';
 
 type CommonInputsProps = {
   name: string;
@@ -15,9 +15,6 @@ type CommonInputsProps = {
 };
 
 export default function CommonInputs({ name, setName, email, setEmail, phone, setPhone }: CommonInputsProps) {
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [phone, setPhone] = useState('');
 
   const [nameError, setNameError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
@@ -46,7 +43,6 @@ export default function CommonInputs({ name, setName, email, setEmail, phone, se
 
   return (
     <ThemedView style={{ width: '100%', alignItems: 'center', gap: 15 }}>
-      {/* Name */}
       <ThemedView style={styles.container}>
         <ThemedText style={styles.label}>Full name</ThemedText>
         <TextInput
@@ -59,7 +55,6 @@ export default function CommonInputs({ name, setName, email, setEmail, phone, se
         {nameError && <ThemedText style={styles.errorText}>{nameError}</ThemedText>}
       </ThemedView>
 
-      {/* Email */}
       <ThemedView style={styles.container}>
         <ThemedText style={styles.label}>Email</ThemedText>
         <TextInput
@@ -75,7 +70,6 @@ export default function CommonInputs({ name, setName, email, setEmail, phone, se
         {emailError && <ThemedText style={styles.errorText}>{emailError}</ThemedText>}
       </ThemedView>
 
-      {/* Phone */}
       <ThemedView style={styles.container}>
         <ThemedText style={styles.label}>Phone number</ThemedText>
         <TextInput

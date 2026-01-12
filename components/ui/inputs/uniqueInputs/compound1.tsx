@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { TextInput, StyleSheet } from "react-native";
+import { StyleSheet, TextInput } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
-import { ThemedView } from "../../../themed-view";
-import { ThemedText } from "../../../themed-text";
 import formSchema from "../../../../assets/data/formSchema.json";
+import { ThemedText } from "../../../themed-text";
+import { ThemedView } from "../../../themed-view";
 
 type Compound1InputProps = {
   label?: string;
@@ -49,7 +49,6 @@ export default function Compound1Input({
       <ThemedText style={styles.label}>{label}</ThemedText>
 
       <ThemedView style={styles.row}>
-        {/* Picker wrapper */}
         <ThemedView style={styles.pickerWrapper}>
           <DropDownPicker
             open={open}
@@ -72,7 +71,6 @@ export default function Compound1Input({
           />
         </ThemedView>
 
-        {/* TextInput wrapper */}
         <ThemedView style={styles.inputWrapper}>
           <TextInput
             value={value}
