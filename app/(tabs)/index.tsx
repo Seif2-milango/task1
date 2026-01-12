@@ -140,7 +140,7 @@ export default function HomeScreen() {
               position: 'absolute',
               top: 50,
               left: 20,
-              height: 'auto', //was 90
+              height: 'auto',
               paddingHorizontal: 20,
               backgroundColor: 'transparent',
             }}
@@ -194,14 +194,12 @@ export default function HomeScreen() {
             </ThemedView>
           ) : (
           <>
-            {/* Caption */}
             <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
               <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
                 Please fill in the form below and click submit when done.
               </ThemedText>
             </ThemedView>
 
-            {/* Step 1 */}
             <ThemedView
             style={{
               width: '100%',
@@ -209,26 +207,7 @@ export default function HomeScreen() {
               alignItems: 'center',
               gap: 15,
             }}>
-              {/* <CleanInput
-                label="Full name"
-                value={name}
-                onChangeText={setName}
-                placeholder="Enter your name"
-              />
-
-              <EmailInput
-                label="Email address"
-                value={email}
-                onChangeText={setEmail}
-                placeholder="your@email.com"
-              />
-
-              <PhoneInput
-                label="Phone number"
-                value={phone}
-                onChangeText={setPhone}
-              /> */}
-
+              
               <CommonInputs
                 name={name}
                 setName={setName}
