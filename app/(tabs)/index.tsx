@@ -2,7 +2,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { Pressable, ScrollView, StyleSheet } from 'react-native';
 
 import CompoundPicker from '@/components/ui/compoundPicker';
 import CommonInputs from '@/components/ui/inputs/commonInputs';
@@ -25,10 +25,73 @@ export default function HomeScreen() {
   const [villaNo, setVillaNo] = useState('');
   const [moveInDate, setMoveInDate] = useState<Date | null>(null);
 
+  const [aptNo, setAptNo] = useState('');
+  const [passportNo, setPassportNo] = useState('');
+
   const compoundData = compoundId
     ? formSchema.compounds[compoundId as keyof typeof formSchema.compounds]
     : null;
 
+  const [consent, setConsent] = useState(false);
+  const isCommonValid = name.trim() && email.trim() && phone.trim();
+  const isCompoundValid =
+    (compoundId === 'c1' && unit.trim() && houseType) ||
+    (compoundId === 'c2' && villaNo.trim() && moveInDate) ||
+    (compoundId === 'c3' && unit.trim() && email.trim());
+  const isFormValid = isCommonValid && isCompoundValid && consent;
+
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [submittedData, setSubmittedData] = useState<any>(null);
+
+  const handleSubmit = () => {
+    const baseData = {
+      name,
+      email,
+      phone,
+      compoundId,
+      consent,
+      submittedAt: new Date().toISOString(),
+    };
+
+    let compoundSpecificData = {};
+
+    if (compoundId === 'c1') {
+      compoundSpecificData = { unit, houseType };
+    } else if (compoundId === 'c2') {
+      compoundSpecificData = { villaNo, moveInDate };
+    } else if (compoundId === 'c3') {
+      compoundSpecificData = { apartmentNumber: aptNo, passportNumber: passportNo };
+    }
+
+    const data = { ...baseData, ...compoundSpecificData };
+    setSubmitting(true);
+    setSubmittedData(data);
+
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+    }, 3000);
+  };
+
+  if (submitted && submittedData) {
+    return (
+      <ThemedView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
+        <MaterialIcons name="check-circle" size={64} color="#00AEFF" />
+        <ThemedText style={{ fontSize: 20, marginTop: 12, marginBottom: 20 }}>
+          Thank you for registering!
+        </ThemedText>
+
+        <ThemedView style={{ width: '100%', gap: 8 }}>
+          {Object.entries(submittedData).map(([key, value]) => (
+            <ThemedText key={key} style={{ fontSize: 14, color: '#414141' }}>
+              {key}: {value?.toString()}
+            </ThemedText>
+          ))}
+        </ThemedView>
+      </ThemedView>
+    );
+  }
   return (
     <ThemedView style={{ flex: 1 }}>
       <ScrollView
@@ -155,13 +218,56 @@ export default function HomeScreen() {
 
           {compoundId === 'c3' && (
             <Compound3Input
-              aptNo={unit}
-              setAptNo={setUnit}
-              passportNo={email}
-              setPassportNo={setEmail}
+              aptNo={aptNo}
+              setAptNo={setAptNo}
+              passportNo={passportNo}
+              setPassportNo={setPassportNo}
             />
           )}
         </ThemedView>
+
+        <ThemedView
+          style={{
+            width: '80%',
+            marginTop: 30,
+            alignSelf: 'center',
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            gap: 10,
+          }}
+        >
+          <Pressable onPress={() => setConsent(!consent)}>
+            <MaterialIcons
+              name={consent ? 'check-box' : 'check-box-outline-blank'}
+              size={24}
+              color="#414141d0"
+              
+            />
+          </Pressable>
+
+          <ThemedText style={{ flex: 1, fontSize: 12, lineHeight: 15, color: '#B0B0B0'  }}>
+            I confirm that I have read and agree to the Terms and Conditions and Privacy Policy, and I consent to the processing of my personal data for account registration and use of the application.
+          </ThemedText>
+        </ThemedView>
+
+        <Pressable
+          disabled={!isFormValid || submitting}
+          onPress={handleSubmit}
+          style={{
+            width: '80%',
+            alignSelf: 'center',
+            marginTop: 20,
+            paddingVertical: 14,
+            borderRadius: 20,
+            backgroundColor: isFormValid ? '#00AEFF' : '#B0B0B0',
+            alignItems: 'center',
+          }}
+        >
+          <ThemedText style={{ color: 'white', fontWeight: '600' }}>
+            {submitting ? 'Submitting...' : 'Submit'}
+          </ThemedText>
+        </Pressable>
+
       </ScrollView>
     </ThemedView>
   );
