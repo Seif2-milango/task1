@@ -156,132 +156,127 @@ export default function HomeScreen() {
         </ThemedView>
 
         {!compoundId ? (
-            <ThemedView>
-              <ThemedText>
-                Please select a compound to proceed with the registration.
+            <ThemedView style={{width: '100%', alignItems: 'center',}}>
+              <ThemedText style={{ width: '80%', color: '#7d7d7d' }}>
+                Please select a compound to proceed with the registration...
               </ThemedText>
             </ThemedView>
-          )
-          : 
-          (<>
+          ) : (
+          <>
             {/* Caption */}
-        <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
-          <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
-            Please fill in the form below and click submit when done.
-          </ThemedText>
-        </ThemedView>
+            <ThemedView style={{ width: '100%', alignItems: 'center', marginBottom: 30 }}>
+              <ThemedText type="caption" style={{ width: '90%', textAlign: 'center' }}>
+                Please fill in the form below and click submit when done.
+              </ThemedText>
+            </ThemedView>
 
-        {/* Step 1 */}
-        <ThemedView
-        style={{
-          width: '100%',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 15,
-        }}>
-          {/* <CleanInput
-            label="Full name"
-            value={name}
-            onChangeText={setName}
-            placeholder="Enter your name"
-          />
+            {/* Step 1 */}
+            <ThemedView
+            style={{
+              width: '100%',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: 15,
+            }}>
+              {/* <CleanInput
+                label="Full name"
+                value={name}
+                onChangeText={setName}
+                placeholder="Enter your name"
+              />
 
-          <EmailInput
-            label="Email address"
-            value={email}
-            onChangeText={setEmail}
-            placeholder="your@email.com"
-          />
+              <EmailInput
+                label="Email address"
+                value={email}
+                onChangeText={setEmail}
+                placeholder="your@email.com"
+              />
 
-          <PhoneInput
-            label="Phone number"
-            value={phone}
-            onChangeText={setPhone}
-          /> */}
+              <PhoneInput
+                label="Phone number"
+                value={phone}
+                onChangeText={setPhone}
+              /> */}
 
-          <CommonInputs
-            name={name}
-            setName={setName}
-            email={email}
-            setEmail={setEmail}
-            phone={phone}
-            setPhone={setPhone}
-          />
+              <CommonInputs
+                name={name}
+                setName={setName}
+                email={email}
+                setEmail={setEmail}
+                phone={phone}
+                setPhone={setPhone}
+              />
 
-          {compoundId === 'c1' && (
-            <Compound1Input
-              value={unit}
-              onChangeText={setUnit}
-              onSelect={setHouseType}
-              placeholder='Unit number'
-            />
-          )}
+              {compoundId === 'c1' && (
+                <Compound1Input
+                  value={unit}
+                  onChangeText={setUnit}
+                  onSelect={setHouseType}
+                  placeholder='Unit number'
+                />
+              )}
 
-          {compoundId === 'c2' && (
-            <Compound2Input
-              villaNo={villaNo}
-              setVillaNo={setVillaNo}
-              moveInDate={moveInDate}
-              setMoveInDate={setMoveInDate}
-            />
-          )}
+              {compoundId === 'c2' && (
+                <Compound2Input
+                  villaNo={villaNo}
+                  setVillaNo={setVillaNo}
+                  moveInDate={moveInDate}
+                  setMoveInDate={setMoveInDate}
+                />
+              )}
 
-          {compoundId === 'c3' && (
-            <Compound3Input
-              aptNo={aptNo}
-              setAptNo={setAptNo}
-              passportNo={passportNo}
-              setPassportNo={setPassportNo}
-            />
-          )}
-        </ThemedView>
+              {compoundId === 'c3' && (
+                <Compound3Input
+                  aptNo={aptNo}
+                  setAptNo={setAptNo}
+                  passportNo={passportNo}
+                  setPassportNo={setPassportNo}
+                />
+              )}
+            </ThemedView>
 
-        <ThemedView
-          style={{
-            width: '80%',
-            marginTop: 30,
-            alignSelf: 'center',
-            flexDirection: 'row',
-            alignItems: 'flex-start',
-            gap: 10,
-          }}
-        >
-          <Pressable onPress={() => setConsent(!consent)}>
-            <MaterialIcons
-              name={consent ? 'check-box' : 'check-box-outline-blank'}
-              size={24}
-              color="#414141d0"
-              
-            />
-          </Pressable>
+            <ThemedView
+              style={{
+                width: '80%',
+                marginTop: 30,
+                alignSelf: 'center',
+                flexDirection: 'row',
+                alignItems: 'flex-start',
+                gap: 10,
+              }}
+            >
+              <Pressable onPress={() => setConsent(!consent)}>
+                <MaterialIcons
+                  name={consent ? 'check-box' : 'check-box-outline-blank'}
+                  size={24}
+                  color="#414141d0"
+                  
+                />
+              </Pressable>
 
-          <ThemedText style={{ flex: 1, fontSize: 12, lineHeight: 15, color: '#B0B0B0'  }}>
-            I confirm that I have read and agree to the Terms and Conditions and Privacy Policy, and I consent to the processing of my personal data for account registration and use of the application.
-          </ThemedText>
-        </ThemedView>
+              <ThemedText style={{ flex: 1, fontSize: 12, lineHeight: 15, color: '#B0B0B0'  }}>
+                I confirm that I have read and agree to the Terms and Conditions and Privacy Policy, and I consent to the processing of my personal data for account registration and use of the application.
+              </ThemedText>
+            </ThemedView>
 
-        <Pressable
-          disabled={!isFormValid || submitting}
-          onPress={handleSubmit}
-          style={{
-            width: '80%',
-            alignSelf: 'center',
-            marginTop: 20,
-            paddingVertical: 14,
-            borderRadius: 20,
-            backgroundColor: isFormValid ? '#00AEFF' : '#B0B0B0',
-            alignItems: 'center',
-          }}
-        >
-          <ThemedText style={{ color: 'white', fontWeight: '600' }}>
-            {submitting ? 'Submitting...' : 'Submit'}
-          </ThemedText>
-        </Pressable>
-          </>)
-        }
-
-        
-
+            <Pressable
+              disabled={!isFormValid || submitting}
+              onPress={handleSubmit}
+              style={{
+                width: '80%',
+                alignSelf: 'center',
+                marginTop: 20,
+                paddingVertical: 14,
+                borderRadius: 20,
+                backgroundColor: isFormValid ? '#00AEFF' : '#7d7d7d',
+                alignItems: 'center',
+              }}
+            >
+              <ThemedText style={{ color: 'white', fontWeight: '600' }}>
+                {submitting ? 'Submitting...' : 'Submit'}
+              </ThemedText>
+            </Pressable>
+          </>)}
       </ScrollView>
     </ThemedView>
   );
