@@ -1,6 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
+import { Feather } from "@expo/vector-icons";
 import { useState } from "react";
-import { Image, StyleSheet } from "react-native";
+import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import { ThemedView } from "../../../themed-view";
 import NumberInput from "../number";
 
@@ -17,6 +18,7 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
 
     const [passportNoError, setPassportNoError] = useState<string | null>(null);
     const passportRegex = /^[A-Z0-9]{9}$/;
+    const [hidePassport, setHidePassport] = useState(true);
 
     const validateAptNo = (text: string) => {
         setAptNo(text);
@@ -29,13 +31,13 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
         setPassportNo(normalized);
 
         if (!normalized) {
-            setPassportNoError("Passport number is required");
+            setPassportNoError("");
             return;
         }
 
         setPassportNoError(
             !passportRegex.test(normalized)
-            ? "Passport number must be 9 characters, A-Z and 0-9 only"
+            ? ""
             : null
         );
     };
@@ -52,7 +54,7 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
                 placeholder="Enter here"
             />
 
-            <ThemedView style={styles.passportContainer}>
+            {/* <ThemedView style={styles.passportContainer}>
                 <ThemedText style={styles.label}>Passport number</ThemedText>
                 <Image
                     source={require("../../../../assets/images/passport.png")}
@@ -70,7 +72,44 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
                     size="large"
                     placeholder="A89141501"
                 />
+            </ThemedView> */}
 
+            <ThemedView style={styles.passportContainer}>
+                <ThemedText style={styles.label}>Passport number</ThemedText>
+                <Image
+                source={require("../../../../assets/images/passport.png")}
+                style={styles.image}
+                resizeMode="contain"
+                />
+
+                <ThemedView style={{ position: "relative" }}>
+                <NumberInput
+                    label=""
+                    value={hidePassport ? "Hidden" : passportNo}
+                    setValue={(text: string) => {
+                    validatePassportNo(text);
+                    }}
+                    regex={passportRegex}
+                    errorMessage="Passport number must be 9 characters, A-Z and 0-9 only"
+                    maxLength={9}
+                    size="large"
+                    placeholder="A89141501"
+                    editable={!hidePassport}
+                />
+
+                <TouchableOpacity
+                    onPress={() => setHidePassport(!hidePassport)}
+                    style={{ position: "absolute", right: 15, top: 45 }}
+                >
+                    <Feather
+                    name={hidePassport ? "eye-off" : "eye"}
+                    size={20}
+                    color="#9CA3AF"
+                    />
+                </TouchableOpacity>
+                </ThemedView>
+
+                {passportNoError && <ThemedText style={{ color: "#EF4444", marginTop: 6 }}>{passportNoError}</ThemedText>}
             </ThemedView>
         </ThemedView>
     )
