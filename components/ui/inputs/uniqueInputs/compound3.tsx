@@ -13,7 +13,7 @@ type Compound3InputProps = {
 
 export default function Compound3Input({aptNo, setAptNo, passportNo, setPassportNo}: Compound3InputProps) {
     const [aptNoError, setAptNoError] = useState<string | null>(null);
-    const aptNoRegex = /^(?:[1-9]\d?|1\d\d|1000)$/;
+    const aptNoRegex = /^(1000|[1-9]\d{0,2})$/;
 
     const [passportNoError, setPassportNoError] = useState<string | null>(null);
     const passportRegex = /^[A-Z0-9]{9}$/;
@@ -45,7 +45,7 @@ export default function Compound3Input({aptNo, setAptNo, passportNo, setPassport
             <NumberInput
                 label="Apartment number"
                 value={aptNo}
-                setValue={setAptNo}
+                setValue={validateAptNo}
                 regex={aptNoRegex}
                 errorMessage="Invalid apartment number: 1-1000"
                 size="medium"
